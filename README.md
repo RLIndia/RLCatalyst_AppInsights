@@ -1,1 +1,1 @@
-# RLCatalyst_SmartView
+# RLCatalyst_AppInsights
