@@ -1,0 +1,111 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "AWS SC Multiple SC products and portfolios",
+  "Metadata": {
+    "AWS::CloudFormation::Interface": {
+      "ParameterGroups": [
+        {
+          "Label": {
+            "default": "Portfolio Information"
+          },
+          "Parameters": [
+            "DisplayName",
+            "PortfolioDescription",
+            "ProviderName"
+          ]
+        }
+      ]
+    }
+  },
+  "Parameters": {
+    "ProviderName": {
+      "Type": "String",
+      "Description": "Portfolio ProviderName",
+      "Default": "APP-Insights"
+    },
+    "PortfolioDescription": {
+      "Type": "String",
+      "Description": "AWS SC Sample TF Portfolio",
+      "Default": "AWS-Appregistry-auto"
+    },
+    "DisplayName": {
+      "Type": "String",
+      "Description": "Portfolio Name",
+      "Default": "Appregistry-Insights"
+    }
+  },
+  "Resources": {
+    "ProdAsss": {
+      "Type": "AWS::ServiceCatalog::PortfolioProductAssociation",
+      "DependsOn": [
+        "SCsampleport",
+        "SCsmpleproductLamp"
+      ],
+      "Properties": {
+        "AcceptLanguage": "en",
+        "PortfolioId": {
+          "Ref": "SCsampleport"
+        },
+        "ProductId": {
+          "Ref": "SCsmpleproductLamp"
+        }
+      }
+    },
+    "SCsmpleproductLamp": {
+      "Type": "AWS::ServiceCatalog::CloudFormationProduct",
+      "Properties": {
+        "Owner": "MP Team",
+        "SupportDescription": "Support Description",
+        "Description": "Lamp Stack-TF",
+        "Distributor": "AWS MP Team Sample",
+        "SupportEmail": "deepashree.nataraju@relevancelab.com",
+        "AcceptLanguage": "en",
+        "SupportUrl": "https://support.com",
+        "Name": "appregistry-appinsights",
+        "ProvisioningArtifactParameters": [
+          {
+            "Description": "Lamp TF V1",
+            "Info": {
+              "LoadTemplateFromURL": {
+                "Fn::Sub": "https://appregitry-insights.s3.amazonaws.com/app-automation.yaml"
+              }
+            },
+            "Name": "V1"
+          }
+        ]
+      }
+    },
+   
+    "SCsampleport": {
+      "Type": "AWS::ServiceCatalog::Portfolio",
+      "Properties": {
+        "ProviderName": {
+          "Ref": "ProviderName"
+        },
+        "Description": {
+          "Ref": "PortfolioDescription"
+        },
+        "DisplayName": {
+          "Ref": "DisplayName"
+        },
+        "AcceptLanguage": "en"
+      }
+    }
+  },
+  "Outputs": {
+    "ServiceCatalogUrl": {
+      "Description": "Service Catalog URL",
+      "Value": {
+        "Fn::Sub": "https://console.aws.amazon.com/servicecatalog/home"
+      }
+    },
+    "NewPortFolio": {
+      "Description": "Service Catalog Portfolio URL",
+      "Value": {
+        "Fn::Sub": "https://console.aws.amazon.com/servicecatalog/home?region=${AWS::Region}#/portfolio/details?portfolioId=${SCsampleport}"
+      }
+    }
+  }
+}
+
+
