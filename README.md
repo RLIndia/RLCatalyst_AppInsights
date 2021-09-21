@@ -42,6 +42,8 @@ In-line Python Lambda function to retrieve the list of applications, attributes 
 
 In-line Python Lambda function to retrieve the application cost and orphaned resources cost.
 
+In-line Python Lambda function to retrieve budget information.
+
 Creates an authorization layer that API Gateway activates for methods that have authorization enabled. API Gateway activates the authorizer when a client calls those methods
 
 IAM:
