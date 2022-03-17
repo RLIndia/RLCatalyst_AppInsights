@@ -67,7 +67,7 @@
             "Description": "Lamp TF V1",
             "Info": {
               "LoadTemplateFromURL": {
-                "Fn::Sub": "https://rlcatalystappinsights.s3.amazonaws.com/app-automation.yaml"
+                "Fn::Sub": "https://appregitry-insights.s3.amazonaws.com/app-automation.yaml"
               }
             },
             "Name": "V1"
